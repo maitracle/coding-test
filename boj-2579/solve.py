@@ -1,21 +1,17 @@
 N = int(input())
 
-points = [0]
-dp_map = [0] * (N + 2)
+points = [0 for _ in range(301)]
+dp_map = [0 for _ in range(301)]
 
 for i in range(N):
-    points.append(int(input()))
+    points[i] = int(input())
 
-dp_map[1] = points[1]
-dp_map[2] = points[1] + points[2]
-dp_map[3] = max(points[1] + points[3], points[2] + points[3])
-
-
-def solve(n):
-    if dp_map[n] == 0:
-        dp_map[n] = max(solve(n - 3) + points[n - 1] + points[n], solve(n - 2) + points[n])
-
-    return dp_map[n]
+dp_map[0] = points[0]
+dp_map[1] = points[0] + points[1]
+dp_map[2] = max(points[0] + points[2], points[1] + points[2])
 
 
-print(solve(N))
+for i in range(3, N):
+    dp_map[i] = max(dp_map[i - 3] + points[i - 1] + points[i], dp_map[i - 2] + points[i])
+
+print(dp_map[N - 1])
