@@ -37,8 +37,10 @@ def solution(lines):
         refined.append(get_start_end(line))
 
     for current in refined:
-        max_throughput = max(max_throughput, count_throughput(refined, current[0], current[0] + 1000),
-                             count_throughput(refined, current[1], current[1] + 1000))
+        max_throughput = max(
+            max_throughput,
+            count_throughput(refined, current[1], current[1] + 1000),
+        )
     return max_throughput
 
 
